@@ -133,6 +133,89 @@ class Brand(models.Model):
     def __str__(self):
         return self.title
 
+    #Adding the SKU Module - I'm going to keep it as models.
+    #Models file because I don't need to have the Page functionality built in with django models. 
+    #This also will be helpful to just edit the full list
+    
+class Sku(models.Model):
+    author = models.ForeignKey('auth.User')
+    title = models.CharField(max_length=20)
+    article = models.ForeignKey('product.ProductPage', on_delete=models.PROTECT) 
+    friendly_name = models.CharField(max_length=200)
+	#Country
+    US = 'United States'
+    CA = 'Canada'
+    COUNTRY_TYPE = (
+        (US, 'US'),
+        (CA, 'CA'),
+    )
+    country_choice = models.CharField(
+        max_length=15,
+        choices=COUNTRY_TYPE,
+        default=US,
+        )
+    #SKU STATUS
+    Live = 'Live'
+    NotLive = 'Not Live'
+    BLOCKED = 'Blocked'
+    TEMPUNAV = 'Temporarily Unavailable'
+    STATUS_TYPE = (
+        (Live, 'Live'),
+        (NotLive, 'Not Live/Removed From Site'),
+        (BLOCKED, 'Blocked'),
+        (TEMPUNAV, 'Temporarily Unavailable'),
+        )
+    status_choices = models.CharField(
+        max_length=200,
+        choices=STATUS_TYPE,
+        default=Live,
+        )
+    #Model Type
+    MTM = 'Made to Manufacture'
+    CTO = 'Configurable to Order'
+    SKU_Type = (
+        (MTM, 'Made to Manufacture'), 
+        (CTO, 'Configurable to Order')
+        )
+    type_choices = models.CharField(
+        max_length=200,
+        choices=SKU_Type,
+        default= MTM,
+        )
+    sku_link = models.TextField(default='NULL')
+    processor_choice = models.ForeignKey('product.processor', on_delete=models.PROTECT)
+    os_choice = models.ForeignKey('product.os', on_delete=models.PROTECT)
+    memory_choice = models.ForeignKey('product.memory', on_delete=models.PROTECT)
+    hd_choice = models.ForeignKey('product.hd', on_delete=models.PROTECT)
+    display_choice = models.ForeignKey('product.display', on_delete=models.PROTECT)
+    ss_choice = models.ForeignKey('product.ss', on_delete=models.PROTECT)
+    color_choice = models.ForeignKey('product.color', on_delete=models.PROTECT)
+    #Price Choices
+    TierOne = '1'
+    TierTwo = '2'
+    TierThree = '3'
+    TierFour = '4'
+    Price_Tier = (
+        (TierOne, 'Above $3,000'),
+        (TierTwo, 'Between $1,000 - $2999.99'),
+        (TierThree, 'Between $500 - $999.99'),
+        (TierFour, 'Between $100 - $499.99'),
+        )
+    price_choice = models.CharField(
+        max_length=15,
+        choices=Price_Tier,
+        default=TierThree,
+        )
+    #Dates
+    created_date = models.DateTimeField(
+        default=timezone.now)
+    live_date = models.DateTimeField(
+        blank=True, null=True)
+    def publish(self):
+        self.created_date = timezone.now()
+        self.save()
+    def __str__(self):
+        return self.title
 
 
 
@@ -223,4 +306,6 @@ class ProductPage(Page):
         FieldPanel('live_date'),
         FieldPanel('launch_notes', classname="full"),
     ]
+    
+
     

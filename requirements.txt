@@ -1,2 +1,4 @@
 Django>=1.11,<1.12
 wagtail>=1.11,<1.12
+
+mysecret = '+2p^yh!0gj*7bd0k6xrr9x)tab+fyp#4eu9tf!6kefcp*n&22$
