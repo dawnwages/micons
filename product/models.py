@@ -2,15 +2,30 @@
 from __future__ import unicode_literals
 
 from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.wagtailsearch import index
+from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.wagtailcore.fields import ( RichTextField, StreamField )
+from wagtail.wagtailadmin.edit_handlers import ( FieldPanel, MultiFieldPanel, StreamFieldPanel )
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from django.db import models
 from django.utils import timezone
 from django.db.models import ProtectedError
+from django import forms
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+from taggit.models import TaggedItemBase
+from taggit.managers import TaggableManager
+
 
 # Create your models here.
 #Django Foreign Key Models
+
+class ProductTag(TaggedItemBase):
+	content_object = models.CharField(max_length=50, db_index=True)
+	class Meta:
+		verbose_name = "Tag"
+		verbose_name_plural = "Tags"
 
 class Processor(models.Model):
     author = models.ForeignKey('auth.User')
@@ -222,16 +237,95 @@ class Sku(models.Model):
 
 #Product Models
 class ProductIndexPage(Page):
-    intro = RichTextField(blank=True)
     
+    """
+    This is merging the Tom Dyson tutorial and the wagtail bakery demo
+    Each of the aspects are divided into discrete functions to make it easier to follow.
+    """
+    intro = RichTextField(
+        help_text='Text to descript the index of the products',
+        blank=True)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text='Pretty Banner Image :)')
     content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full")
-    
+        FieldPanel('intro', classname="full"),
+        ImageChooserPanel('image'),
     ]
     
+    #Can only have ProductPage children
+    subpage_types = ['ProductPage']
+    
+    """ 
+    This is the way that we render product list from TD's tutorial. 
+    Comment out and use wagtail bakery demo
+    
+    def get_context(self, request):
+    # Update context to include only published posts, 
+    # in reverse chronological order
+	    context = super(ProductIndexPage, self).get_context(request)
+	    live_productpages = self.get_children().live()
+	    context['productpages'] = live_productpages.order_by('-first_published_at')
+	    return context
+    """
+    # Returns a queryset of ProductPage objects that are live, that are direct
+    # descendants of this index page with most recent first
+    def get_products(self):
+        return ProductPage.objects.live().descendant_of(
+            self).order_by('-first_published_at')
+
+    # Allows child objects (e.g. BreadPage objects) to be accessible via the
+    # template. We use this on the HomePage to display child items of featured
+    # content
+    def children(self):
+        return self.get_children().specific().live()
+	   
+	   
+ # Pagination for the index page. We use the `django.core.paginator` as any
+    # standard Django app would, but the difference here being we have it as a
+    # method on the model rather than within a view function
+    def paginate(self, request, *args):
+        page = request.GET.get('page')
+        paginator = Paginator(self.get_products(), 12)
+        try:
+            pages = paginator.page(page)
+        except PageNotAnInteger:
+            pages = paginator.page(1)
+        except EmptyPage:
+            pages = paginator.page(paginator.num_pages)
+        return pages
+
+    # Returns the above to the get_context method that is used to populate the
+    # template
+    def get_context(self, request):
+        context = super(ProductIndexPage, self).get_context(request)
+
+        # ProductPage objects (get_products) are passed through pagination
+        products = self.paginate(request, self.get_products())
+
+        context['products'] = products
+
+        return context
+
+
 class ProductPage(Page):
     author = models.ForeignKey('auth.User', on_delete=models.PROTECT)
     article_num = models.CharField(max_length=20)
+    feature_image = models.ForeignKey('wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+')
+    thumbnail_image = models.ForeignKey('wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+')
+    short_desc = models.CharField(max_length=250, blank=True)
     #BrandSegment
     CON = 'Consumer'
     COM = 'Commercial'
@@ -287,6 +381,7 @@ class ProductPage(Page):
     halo = models.BooleanField(default=False)
     touch = models.BooleanField(default=False)
     conv = models.BooleanField(default=False)
+    tags = TaggableManager(through=ProductTag, blank=True)
     launch_notes = RichTextField(blank=True)
     created_date = models.DateTimeField(default=timezone.now)
     live_date = models.DateTimeField(blank=True, null=True)
@@ -302,9 +397,12 @@ class ProductPage(Page):
         FieldPanel('halo'),
         FieldPanel('touch'),
         FieldPanel('conv'),
+        FieldPanel('tags'),
         FieldPanel('created_date'),
         FieldPanel('live_date'),
         FieldPanel('launch_notes', classname="full"),
+        ImageChooserPanel('feature_image'),
+        ImageChooserPanel('thumbnail_image'),
     ]
     
 
