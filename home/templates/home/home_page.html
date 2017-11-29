@@ -1,18 +1,20 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
-
-
+{% load wagtailcore_tags wagtailimages_tags micons_tags %}
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-	
-	<header> <h1>Dawn Wages</h1> </header>
-	<main class="container-fluid">
 
-					<h3 class="brief-heading"><span>The</span>Brief</h3>
+
+	
+<header> <h1>Dawn Wages</h1> </header>
+<main class="container-fluid">
+
+					<h3 class="brief-heading"> The Brief</h3>
 
 				    <h1>Welcome to your new Wagtail site!</h1>
-				    {% load wagtailcore_tags %}
+				   
+				    {% skus %}
+				   
 
 
 				    <p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a> (make sure you have run "./manage.py createsuperuser" in the console first).</p>

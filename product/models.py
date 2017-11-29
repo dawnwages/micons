@@ -9,6 +9,9 @@ from wagtail.wagtailadmin.edit_handlers import ( FieldPanel, MultiFieldPanel, St
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
+from wagtail.wagtailsnippets.models import register_snippet
+
 from django.utils import timezone
 from django.db.models import ProtectedError
 from django import forms
@@ -27,6 +30,8 @@ class ProductTag(TaggedItemBase):
 		verbose_name = "Tag"
 		verbose_name_plural = "Tags"
 
+@register_snippet
+@python_2_unicode_compatible
 class Processor(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -41,7 +46,9 @@ class Processor(models.Model):
 
     def __str__(self):
         return self.title
-
+        
+@register_snippet
+@python_2_unicode_compatible
 class Os(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -57,6 +64,8 @@ class Os(models.Model):
     def __str__(self):
         return self.title
 
+@register_snippet
+@python_2_unicode_compatible
 class Memory(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -72,7 +81,8 @@ class Memory(models.Model):
     def __str__(self):
         return self.title
 
-
+@register_snippet
+@python_2_unicode_compatible
 class Hd(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -87,7 +97,10 @@ class Hd(models.Model):
 
     def __str__(self):
         return self.title
-
+        
+        
+@register_snippet
+@python_2_unicode_compatible
 class Display(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -103,6 +116,8 @@ class Display(models.Model):
     def __str__(self):
         return self.title
 
+@register_snippet
+@python_2_unicode_compatible
 class Ss(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -118,6 +133,8 @@ class Ss(models.Model):
     def __str__(self):
         return self.title
 
+@register_snippet
+@python_2_unicode_compatible
 class Color(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -132,7 +149,9 @@ class Color(models.Model):
 
     def __str__(self):
         return self.title
-
+        
+@register_snippet
+@python_2_unicode_compatible
 class Brand(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -151,7 +170,8 @@ class Brand(models.Model):
     #Adding the SKU Module - I'm going to keep it as models.
     #Models file because I don't need to have the Page functionality built in with django models. 
     #This also will be helpful to just edit the full list
-    
+@register_snippet
+@python_2_unicode_compatible   
 class Sku(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=20)
@@ -239,11 +259,11 @@ class Sku(models.Model):
 class ProductIndexPage(Page):
     
     """
-    This is merging the Tom Dyson tutorial and the wagtail bakery demo
+    This is merging the TD tutorial and the wagtail bakery demo
     Each of the aspects are divided into discrete functions to make it easier to follow.
     """
     intro = RichTextField(
-        help_text='Text to descript the index of the products',
+        help_text='Text to describe the index of the products',
         blank=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
@@ -277,6 +297,7 @@ class ProductIndexPage(Page):
     def get_products(self):
         return ProductPage.objects.live().descendant_of(
             self).order_by('-first_published_at')
+
 
     # Allows child objects (e.g. BreadPage objects) to be accessible via the
     # template. We use this on the HomePage to display child items of featured

@@ -13,4 +13,9 @@
         <img src="{{ image.url }}" width="{{ image.width }}"
                                 height="{{ image.height }}" alt="{{ image.alt }}" class="" />
     {% endfor %}
+    
+    
+        {% for item in models %}
+        <h2><a href="{% pageurl item %}">{{ item.title }}</a></h2>
+        {% endfor %}
 {% endblock %}
