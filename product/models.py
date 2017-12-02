@@ -9,9 +9,6 @@ from wagtail.wagtailadmin.edit_handlers import ( FieldPanel, MultiFieldPanel, St
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
-from wagtail.wagtailsnippets.models import register_snippet
-
 from django.utils import timezone
 from django.db.models import ProtectedError
 from django import forms
@@ -24,6 +21,7 @@ from taggit.managers import TaggableManager
 # Create your models here.
 #Django Foreign Key Models
 
+@register_snippet
 class ProductTag(TaggedItemBase):
 	content_object = models.CharField(max_length=50, db_index=True)
 	class Meta:
@@ -31,7 +29,6 @@ class ProductTag(TaggedItemBase):
 		verbose_name_plural = "Tags"
 
 @register_snippet
-@python_2_unicode_compatible
 class Processor(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -44,11 +41,10 @@ class Processor(models.Model):
         self.published_date = timezone.now()
         self.save()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
-        
+
 @register_snippet
-@python_2_unicode_compatible
 class Os(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -61,11 +57,10 @@ class Os(models.Model):
         self.published_date = timezone.now()
         self.save()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
 @register_snippet
-@python_2_unicode_compatible
 class Memory(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -78,11 +73,10 @@ class Memory(models.Model):
         self.published_date = timezone.now()
         self.save()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
 @register_snippet
-@python_2_unicode_compatible
 class Hd(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -95,12 +89,10 @@ class Hd(models.Model):
         self.published_date = timezone.now()
         self.save()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
-        
-        
+
 @register_snippet
-@python_2_unicode_compatible
 class Display(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -113,11 +105,10 @@ class Display(models.Model):
         self.published_date = timezone.now()
         self.save()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
 @register_snippet
-@python_2_unicode_compatible
 class Ss(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -130,11 +121,10 @@ class Ss(models.Model):
         self.published_date = timezone.now()
         self.save()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
 @register_snippet
-@python_2_unicode_compatible
 class Color(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -147,11 +137,10 @@ class Color(models.Model):
         self.published_date = timezone.now()
         self.save()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
-        
+
 @register_snippet
-@python_2_unicode_compatible
 class Brand(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -164,14 +153,14 @@ class Brand(models.Model):
         self.published_date = timezone.now()
         self.save()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
     #Adding the SKU Module - I'm going to keep it as models.
     #Models file because I don't need to have the Page functionality built in with django models. 
     #This also will be helpful to just edit the full list
+    
 @register_snippet
-@python_2_unicode_compatible   
 class Sku(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=20)
