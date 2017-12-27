@@ -1,0 +1,43 @@
+{% load wagtailcore_tags  wagtailimages_tags %}
+
+<div class="title">
+            <h1> <a href="/">MerchPro</a>  
+            <div class="tooltips">
+                <a class="" href="">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a> 
+                <span class="tooltiptext"><small>Add New Resource</small>
+                </span> 
+            </div>
+            </h1>
+</div>
+        <div class="rest">
+            <!--<nav class="pn-scrollnav"><!-- instead of bstimeslider--> 
+                <div id="container"> <!-- instead of "viewContainer"-->
+        
+                    <div id="parent"><!-- instead of class tslshow --><!--instead of class scrolling-wrapper -->
+                    {% for tool in tools %}              
+                      <div class="tooltips contentBlock"><!--instead of card-->
+                      {% image tool.icon fill-70x70 as image %}
+                                <img src="{{ image.url }}" width="{{ image.width }}"
+                                height="{{ image.height }}" alt="{{ image.alt }}" class="" />
+                        <span class="tooltiptext">{{ tool.title }}</span>
+                      </div>
+                    {% endfor %}
+                    </div>                     
+                    
+                </div>
+
+
+         </div>
+                <!--<div>
+                    <span id="scroll-left" class="panner" data-scroll-modifier='-1'>Left</span>
+                    <span id="scroll-right" class="panner" data-scroll-modifier='1'>Right</span>
+                </div>-->
+
+        </div>
+        
+        
+        
+        
+    

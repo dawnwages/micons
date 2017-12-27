@@ -13,6 +13,23 @@ class HomePage(Page):
         FieldPanel('body', classname="full"),
     ]
     
+
+@register_snippet
+class Logo(models.Model):
+    icon = models.ForeignKey('wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+')
+    desc = models.TextField(help_text='Describe Logo',)
+    
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    def __unicode__(self):
+        return self.desc
+    
 @register_snippet
 class Tools(models.Model):
     title =  models.TextField(
