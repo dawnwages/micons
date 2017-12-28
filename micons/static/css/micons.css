@@ -1,3 +1,11 @@
+div {
+	border: solid 1px #000000;
+}
+
+main {
+    padding-top: 75px;
+}
+
 * {
   box-sizing: border-box;
   
@@ -15,10 +23,22 @@
 h1, h2, h3, h4, h5, h6{
 	font-family: 'Barlow Condensed', sans-serif;
 	color: #82D173;
+	text-align: left;
+	
+}
+
+.navbar {
+	background-color: #fff;
+	font-family: 'Lato', sans-serif;
+    font-size: 1em;
 }
 
 .glyphicon-plus{
 	margin: 10px 10px 10px 40px;
+}
+
+.logo {
+	margin:-25px;
 }
 
 .container{
@@ -28,14 +48,91 @@ h1, h2, h3, h4, h5, h6{
 	border: solid 1px #000;
 }
 
+.addTool, h4 {
+	margin-top: -5px;
+	margin-bottom: 0px;
+}
+
 #tools{
-	background-color: #00204A;
+    background-color: #f0f0f0;
+    height: 33px;
+    box-shadow: inset 0 4px 15px 0 rgba(0, 0, 0, 0.1), 0 7px 17px 0 rgba(0, 0, 0, 0.29);
+   /* border-radius: 5px;*/
+}
+
+#tools-container {
+	padding-top: 20px;
 }
 
 section{
-	margin: 20px 80px 20px 20px;
-	padding: 50px;
 
+
+}
+
+.panel-heading, .panel-body {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.postHeading {
+}
+
+.posts, .productUpdates {
+	margin-top: 30px;
+	padding-left: 0px;
+	padding-right: 0px;
+	text-align: center;
+}
+
+.homepageHeading {
+	bottom: 0px;
+	left: 0px;
+	position: absolute;
+}
+
+.post {
+    display: inline-block;
+    margin: 1.5vw .5vw;
+    width: 16.5vw;
+    height: 21.5vw;
+    background: #fff;
+    /*padding: 0;*/
+    /*position: relative;*/
+    overflow: hidden;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.5);
+	text-align: center;
+}
+
+.openToggle {
+    /*display: block;*/
+    /*position: absolute;*/
+    width: 50px;
+    height: 50px;
+    background-color: #3e8ddd;
+    border-radius: 25px;
+    border: 1px solid #3e8ddd;
+    background-image: url(https://static.lenovo.com/ww/campaigns/2017/yogaBrand/lenovo-4-open.png);
+    bottom: 2vw;
+    /*left: 50%;*/
+   /* margin-left: -25px;*/
+}
+
+
+element.style {
+}
+
+.bottomToggle {
+    padding-left: 40%;
+    bottom: -138.5px;
+    left: 0px;
+    position: relative;
+}
+
+.homePageBanner {
+	background-image: url('https://www3.lenovo.com/medias/lenovo-yoga-1-hero-franchise.jpg?context=bWFzdGVyfHd3LXlvZ2EtYnJhbmQtMjAxN3w3MTQzMnxpbWFnZS9qcGVnfHd3LXlvZ2EtYnJhbmQtMjAxNy9oMWMvaDQ0Lzk1NzU2NzkzOTM4MjIuanBnfGY0ZDAyOTE0ODUwNGRlZTVmMGVmMzcyMzcwNDNlNTM2MTUyMGViMTZjMTRmMDE4N2VhNjYzM2ZjODY5MjM0OWY');
+	text-align: center;
+	height:414px;
+	position: relative;
 }
 
 h1{
@@ -71,7 +168,7 @@ header {
     opacity: .5;
     color: #fff;
     text-align: center;
-    border-radius: 6px;
+    /*border-radius: 6px;*/
     padding: 5px 0;
 
 
@@ -132,10 +229,7 @@ header {
 
 /* Instead of card*/
 .contentBlock {
-	width: 70px;
-	height: 70px;
-	margin: 10px;
-	border: solid #fff;
+	margin: -5px;
 	display: inline-block;/*hiding for JSfiddle script*/
 	text-align: center;
 }
