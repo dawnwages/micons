@@ -5,21 +5,50 @@
 {% block content %}
 
 
-<main class="container-fluid">
+<main class="main container-fluid">
 	
-	<div class="homePageBanner col-md-12">
-
-					<h1 class="homepageHeading"> The Brief <small class="homepageSubHeading">Welcome to your new Wagtail site!</small></h1>
+<!--	<div class="homePageBanner col-md-12">
+			
+				<div id="feature-product">
+					<div id="featureToggle" class="bottomToggle feature-product">
+						<div class="openToggle">
+						</div>	
+					</div>
+						<img class="feature-product" src="https://www3.lenovo.com/medias/lenovo-laptop-yoga-920-hero.png?context=bWFzdGVyfHJvb3R8NjE3NTN8aW1hZ2UvcG5nfGgzYy9oZDQvOTU2ODI3NDEyMDczNC5wbmd8MzYzM2Q0OWYwNzRkOTVmNWIyNGRlMjQ1MWNjYzVmY2NiMWMyZmU2Yjg4MmFmMzZlOGFkOTZhMmZlNDExYmFlYg">
+					</div>
+					<h1 class="homepageHeading"> {{ self.title }} || <small class="homepageSubHeading">Welcome to your new Wagtail site!</small></h1>
 	</div>
+-->
+</main>
 
-
+<main class="container container-fluid">
 <div class="row">
 	<div class="container container-fluid">
 	<div class="posts container container-fluid col-md-9">
 	<h2> Merchandising Updates </h2>
-		<section id="postid" class="post">
+	<section id="tagBox" "container container-fluid">
+		<span class="tags">Thunderbolt 3</span>
+		<span class="tags">4K Display</span>
+		<span class="tags">Clearance</span>
+		<span class="tags">Glass</span>
+		<span class="tags">Nvidia GPU</span>
+		<span class="tags">AMD GPU</span>
+		<span class="tags">Touch</span>
+		<span class="tags">Thunderbolt 3</span>
+		<span class="tags">Thunderbolt 3</span>
+		<span class="tags">Thunderbolt 3</span>
+		<span class="tags">Thunderbolt 3</span>
+		<span class="tags">Thunderbolt 3</span>
+		<span class="tags">Thunderbolt 3</span>
+		<span class="tags">Thunderbolt 3</span>
+	</section>
+	
+		<section data-content="Ipsum Delorum Caption..." id="postid" class="post image">
 			<div class="postHeading panel-heading">
 				<h3> Crystal Points </h3>
+			</div>
+			<div class="postDate">
+				<em>January 4th, 2018</em>
 			</div>
 			<div class="panel-body">
 				<p>
@@ -34,9 +63,12 @@
 		
 		</section>
 		
-<section id="postid" class="post">
+<section data-content="Ipsum Delorum Text Text" id="postid" class="post image">
 			<div class="postHeading panel-heading">
 				<h3> Crystal Points </h3>
+			</div>
+			<div class="postDate">
+				<em>January 4th, 2018</em>
 			</div>
 			<div class="panel-body">
 				<p>
@@ -50,9 +82,12 @@
 			</div>
 		</section>
 		
-<section id="postid" class="post">
+	<section data-content="Ipsum Delorum words words" id="postid" class="post image">
 			<div class="postHeading panel-heading">
 				<h3> Crystal Points </h3>
+			</div>
+			<div class="postDate">
+				<em>January 4th, 2018</em>
 			</div>
 			<div class="panel-body">
 				<p>
@@ -66,16 +101,18 @@
 			</div>
 		</section>
 		
-		<section id="postid" class="post">
-
+		<section data-content="text text text" id="postid" class="post image">
+			<div class="postHeading panel-heading">
+				<h3> Crystal Points </h3>
+			</div>
+			<div class="postDate">
+				<em>January 4th, 2018</em>
+			</div>
 			<div class="panel-body">
 				<p>
 					00
 
 				</p>
-			</div>
-					<div class="postHeading panel-heading">
-				<h3> Crystal Points </h3>
 			</div>
 			<div class="bottomToggle">
 				<div class="openToggle">
@@ -123,13 +160,13 @@
 				    <p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a> (make sure you have run "./manage.py createsuperuser" in the console first).</p>
 					<br />
 					<br />
-					<h2>{{ self.title }}</h2>
+					<h2></h2>
 					{{ page.body|richtext }}
 					
-					{% for page in self.get_children.specific %}
-					    <a href="{{ page.url }}">{{ page.title }}</a>
+					
+					    
 	
-					{% endfor %}
+					
 
 				    <p>If you haven't already given the documentation a read, head over to <a href="http://docs.wagtail.io/">http://docs.wagtail.io</a> to start building on Wagtail</p>
 

@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.contenttypes.models import ContentType
+from taggit.models import Tag
+
+from django.shortcuts import render
+
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
@@ -16,17 +21,21 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from taggit.models import TaggedItemBase
 from taggit.managers import TaggableManager
+from modelcluster.fields import ParentalKey
+
 
 
 # Create your models here.
 #Django Foreign Key Models
 
-@register_snippet
+#do not register cluster snippet
+#@register_snippet
 class ProductTag(TaggedItemBase):
-	content_object = models.CharField(max_length=50, db_index=True)
+	content_object = ParentalKey('product.ProductPage', related_name='tagged_items')
 	class Meta:
 		verbose_name = "Tag"
 		verbose_name_plural = "Tags"
+		
 
 @register_snippet
 class Processor(models.Model):
@@ -272,13 +281,18 @@ class ProductIndexPage(Page):
     """ 
     This is the way that we render product list from TD's tutorial. 
     Comment out and use wagtail bakery demo
-    
+    """
     def get_context(self, request):
     # Update context to include only published posts, 
     # in reverse chronological order
 	    context = super(ProductIndexPage, self).get_context(request)
+	    
+	    product_content_type = ContentType.objects.get_for_model(ProductPage)
 	    live_productpages = self.get_children().live()
-	    context['productpages'] = live_productpages.order_by('-first_published_at')
+	    
+	    context['tags'] = ProductTag.objects.all().distinct()
+	    #context['productpages'] = live_productpages.order_by('-first_published_at')
+	    context['products'] = live_productpages.order_by('-first_published_at')
 	    return context
     """
     # Returns a queryset of ProductPage objects that are live, that are direct
@@ -294,7 +308,21 @@ class ProductIndexPage(Page):
     def children(self):
         return self.get_children().specific().live()
 	   
-	   
+	# Not sure if this is compatible with the other code
+	#def serve(self, request):
+	   #get products
+	#   products = ProductPage.objects.child_of(self).live()
+	    
+	   #filter by tag
+#	   tag = request.GET.get('tag')
+#	   if tag:
+#	        products = products.filter(tags__name=tag)
+	        
+#	   return render(request, self.template, {
+#	       'page': self,
+#	       'products': products,
+#	   })
+	
  # Pagination for the index page. We use the `django.core.paginator` as any
     # standard Django app would, but the difference here being we have it as a
     # method on the model rather than within a view function
@@ -311,16 +339,39 @@ class ProductIndexPage(Page):
 
     # Returns the above to the get_context method that is used to populate the
     # template
-    def get_context(self, request):
-        context = super(ProductIndexPage, self).get_context(request)
+    #def get_context(self, request):
+    #    context = super(ProductIndexPage, self).get_context(request)
 
         # ProductPage objects (get_products) are passed through pagination
-        products = self.paginate(request, self.get_products())
+    #    products = self.paginate(request, self.get_products())
+        
+    #    tag = request.GET.get('tag')
+    #    if tag:
+    #        products = products.filter(tags__name=tag)
+            
+    #    return render(request, self.template, {
+    #        'page': self,
+    #        'products': products,
+    #    })
+        
+        
+       # context['products'] = products
 
-        context['products'] = products
+        #return context
 
-        return context
+    def serve(self, request):
+        products = ProductPage.objects.child_of(self).live()
+        
+        tag = request.GET.get('tag')
+        if tag:
+            products = products.filter(tags__name=tag)
+            
+        return render(request, self.template, {
+            'page': self,
+            'products': product,
+        })
 
+    """
 
 class ProductPage(Page):
     author = models.ForeignKey('auth.User', on_delete=models.PROTECT)
@@ -391,7 +442,7 @@ class ProductPage(Page):
     halo = models.BooleanField(default=False)
     touch = models.BooleanField(default=False)
     conv = models.BooleanField(default=False)
-    tags = TaggableManager(through=ProductTag, blank=True)
+    producttag = TaggableManager()
     launch_notes = RichTextField(blank=True)
     created_date = models.DateTimeField(default=timezone.now)
     live_date = models.DateTimeField(blank=True, null=True)
@@ -407,7 +458,7 @@ class ProductPage(Page):
         FieldPanel('halo'),
         FieldPanel('touch'),
         FieldPanel('conv'),
-        FieldPanel('tags'),
+        FieldPanel('producttag'),
         FieldPanel('created_date'),
         FieldPanel('live_date'),
         FieldPanel('launch_notes', classname="full"),

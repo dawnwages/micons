@@ -1,9 +1,16 @@
 div {
-	border: solid 1px #000000;
+	/*border: solid 1px #000000;*/
 }
 
-main {
+.w3-btn, .w3-button {
+    padding: 5px 16px;
+    color: #fff;
+}
+
+.main {
     padding-top: 75px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 * {
@@ -21,10 +28,10 @@ main {
 }
 
 h1, h2, h3, h4, h5, h6{
-	font-family: 'Barlow Condensed', sans-serif;
-	color: #82D173;
-	text-align: left;
-	
+	font-family: 'Lato', sans-serif;
+    color: #00bcd4;
+    text-align: left;
+    padding-left: 10px;
 }
 
 .navbar {
@@ -38,30 +45,42 @@ h1, h2, h3, h4, h5, h6{
 }
 
 .logo {
-	margin:-25px;
+	box-shadow: 0px 3px 10px rgba(0,0,0,0.5);
+}
+
+#profilePic {
+	height: 50px;
+	box-shadow: 0px 3px 10px rgba(0,0,0,0.5);
 }
 
 .container{
 	/*padding-top: 4rem;*/
 	/*overflow-x: hidden;*//*adding for JSfiddle script*/
 	/*width: 600px;*//*adding for JSfiddle script*/
-	border: solid 1px #000;
+	/*border: solid 1px #000;*/
 }
 
 .addTool, h4 {
-	margin-top: -5px;
-	margin-bottom: 0px;
+	/*margin-top: -5px;*/
+	padding-left: 0px;
 }
 
 #tools{
-    background-color: #f0f0f0;
     height: 33px;
-    box-shadow: inset 0 4px 15px 0 rgba(0, 0, 0, 0.1), 0 7px 17px 0 rgba(0, 0, 0, 0.29);
+    /*box-shadow: inset 0 4px 15px 0 rgba(0, 0, 0, 0.1), 0 7px 17px 0 rgba(0, 0, 0, 0.29);*/
    /* border-radius: 5px;*/
 }
 
 #tools-container {
-	padding-top: 20px;
+	background-color: #000;
+	opacity: .80;
+	box-shadow: 0px 3px 10px rgba(0,0,0,0.5);
+	height: 50px;
+}
+
+#tools-container h4 {
+	color: #fff;
+	
 }
 
 section{
@@ -70,11 +89,20 @@ section{
 }
 
 .panel-heading, .panel-body {
-	padding-left: 0px;
-	padding-right: 0px;
+	padding: 0px 0px 0px 0px;
+
 }
 
 .postHeading {
+}
+
+.postDate {
+    background-color: #000;
+    opacity: 0.7;
+    font-size: 12px;
+    text-align: left;
+    padding: 0px 10px 0px 10px;
+    color: #fff;
 }
 
 .posts, .productUpdates {
@@ -84,10 +112,50 @@ section{
 	text-align: center;
 }
 
+.tags {
+	background-color: #000;
+	opacity: .7;
+	font-size: 12px;
+	color: #fff;
+	padding: 5px;
+	line-height: 300%;
+
+}
+
+#tagBox {
+
+    padding: 10px;
+    /* background-color: #f0f0f0; */
+    border-bottom: solid 1px #00bcd4;
+    border-top: solid 1px #00bcd4;
+}
+
+#toolBox {
+	height: 50px;
+	padding: 3px;
+}
+
 .homepageHeading {
-	bottom: 0px;
-	left: 0px;
-	position: absolute;
+    bottom: 0px;
+    left: 350px;
+    position: absolute;
+    color: #fff;
+}
+
+.homepageSubHeading {
+	color: #333;
+}
+
+#feature-product {
+    width: 390px;
+    padding-top: 140px;
+    float: left;
+}
+
+#feature-product img {
+    width: 360px;
+    /*padding-top: 225px;*/
+    float: left;
 }
 
 .post {
@@ -106,11 +174,11 @@ section{
 .openToggle {
     /*display: block;*/
     /*position: absolute;*/
-    width: 50px;
+	width: 50px;
     height: 50px;
-    background-color: #3e8ddd;
+    background-color: #00bcd4;
     border-radius: 25px;
-    border: 1px solid #3e8ddd;
+    border: 1px solid #669297;
     background-image: url(https://static.lenovo.com/ww/campaigns/2017/yogaBrand/lenovo-4-open.png);
     bottom: 2vw;
     /*left: 50%;*/
@@ -125,7 +193,17 @@ element.style {
     padding-left: 40%;
     bottom: -138.5px;
     left: 0px;
+    float: left;
     position: relative;
+}
+
+#featureToggle{
+	padding-left: 20%;
+}
+
+
+.mySlides {
+	left: 20px;
 }
 
 .homePageBanner {
@@ -153,8 +231,9 @@ header {
 
 .tooltips{
 	  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted grey;
+
+  	display: inline-block;
+  /*border-bottom: 1px dotted grey;*/
   color: #005050;
 } 
 
@@ -167,7 +246,11 @@ header {
     background-color: black;
     opacity: .5;
     color: #fff;
+    margin-top: 75%;
+    font: 10px;
+    left: 50%;
     text-align: center;
+    margin-left: 60px;
     /*border-radius: 6px;*/
     padding: 5px 0;
 
@@ -178,6 +261,11 @@ header {
     top: 40%;
     left: 50%;
     margin-left: -60px;
+}
+
+
+.logo-box {
+    background-color: #787878;
 }
 
 .tooltips:hover .tooltiptext {
@@ -229,7 +317,8 @@ header {
 
 /* Instead of card*/
 .contentBlock {
-	margin: -5px;
+	margin-left: 10px;
+	margin-right: 10px;
 	display: inline-block;/*hiding for JSfiddle script*/
 	text-align: center;
 }
@@ -307,3 +396,43 @@ footer{
 }
 ::-webkit-scrollbar-corner       { /* 6 */ }
 ::-webkit-resizer                { /* 7 */ }
+
+
+
+
+.image {
+    position:relative;
+    width:200px;
+    height:200px;
+}
+.image img {
+    width:100%;
+    vertical-align:top;
+}
+.image:after, .image:before {
+    position:absolute;
+    opacity:0;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+.image:after {
+    content:'\A';
+    width:100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.6);
+}
+.image:before {
+    content: attr(data-content);
+    width:100%;
+    color:#fff;
+    z-index:1;
+    bottom:0;
+    padding:4px 10px;
+    text-align:center;
+    background:red;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+}
+.image:hover:after, .image:hover:before {
+    opacity:1;
+}

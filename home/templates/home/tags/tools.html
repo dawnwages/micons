@@ -1,12 +1,14 @@
     
 {% load wagtailcore_tags  wagtailimages_tags %}
 
+<button class="w3-button navbar-left" onclick="w3_open()">☰</button>
 <div id="addTool" class="col-lg-2">
+    
      <h4> <a href="/">MerchPro <span class="glyphicon glyphicon-plus"></span></a></h4>
      
      <span class="tooltiptext"><small>Add New Resource</small>
 </div>
-<div id="toolBox" class="col-lg-10">
+<div id="toolBox" class="col-lg-9">
                     {% for tool in tools %}              
                       <div class="tooltips contentBlock"><!--instead of card-->
                       {% image tool.icon fill-45x45 as image %}

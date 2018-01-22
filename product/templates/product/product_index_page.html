@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags %}
 {% load wagtailcore_tags  wagtailimages_tags %}
+{% load taggit_templatetags2_tags %}
+
     
 {% block content %}
     <h1>{{ page.title }}</h1>
+
     <div class="intro">{{ page.intro|richtext }}</div>
     {% for post in products %}
+
         <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
         {{ post.specific.date }}
         {{ post.feature_image }}
@@ -13,6 +17,56 @@
         <img src="{{ image.url }}" width="{{ image.width }}"
                                 height="{{ image.height }}" alt="{{ image.alt }}" class="" />
     {% endfor %}
+    
+    <section id="tagBox" "container container-fluid">
+    	{% get_taglist as tags %}
+
+	        {% for tag in tags %}
+	        	{% get_taglist as tags %}
+			    <a href=""><span class="tags">{{ tag }} ({{tag.num_times}})</span></a> 
+			{% endfor %}
+
+
+		<span class="tags">Thunderbolt 3</span>
+		<span class="tags">4K Display</span>
+		<span class="tags">Clearance</span>
+		<span class="tags">Glass</span>
+		<span class="tags">Nvidia GPU</span>
+		<span class="tags">AMD GPU</span>
+		<span class="tags">Touch</span>
+		<span class="tags">Thunderbolt 3</span>
+		<span class="tags">Thunderbolt 3</span>
+		<span class="tags">Thunderbolt 3</span>
+		<span class="tags">Thunderbolt 3</span>
+		<span class="tags">Thunderbolt 3</span>
+		<span class="tags">Thunderbolt 3</span>
+		<span class="tags">Thunderbolt 3</span>
+	</section>
+    
+    <table id="myTable" class="table table-striped">
+		    <thead>
+		      <tr class="header">
+		        <th>Article Number</th>
+		        <th>Live Date</th>
+		        <th>Series Name</th>
+		        <th>Brand</th>
+
+		      </tr>
+		    </thead>
+		    <tbody>
+
+		    {% for post in products %}
+		      <tr>
+		      	 <td> <a href="http://www3.lenovo.com/us/en/p/{{ post.article_num }}">{{ post.article_num }}</a></td>
+		        <td> {{ post.live_date }}</td>
+		        <td> {{ post.title }}</td>
+		        <td> {{ post.brandtype }}</td>
+		      </tr>
+		     {% endfor %}
+		    </tbody>
+		  </table>
+		
+		</div>
     
     
         {% for item in models %}
