@@ -160,7 +160,16 @@ WAGTAIL_SITE_NAME = "micons"
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://example.com'
 
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 ALLOWED_HOSTS = ['*', 'dawnwages.pythonanywhere.com']
+
+
 
 # Configure Django App for Heroku.
 #import django_heroku
