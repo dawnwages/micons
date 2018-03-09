@@ -161,3 +161,7 @@ WAGTAIL_SITE_NAME = "micons"
 BASE_URL = 'http://example.com'
 
 ALLOWED_HOSTS = ['*', 'dawnwages.pythonanywhere.com']
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
