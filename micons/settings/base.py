@@ -55,10 +55,18 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    
+    
     'debug_toolbar',
 
     'wagtail.contrib.modeladmin',  # Don't repeat if it's there already
+
+
+
+
 ]
 
 MIDDLEWARE = [
@@ -70,6 +78,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     
@@ -133,6 +143,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -172,5 +184,5 @@ ALLOWED_HOSTS = ['*', 'dawnwages.pythonanywhere.com']
 
 
 # Configure Django App for Heroku.
-#import django_heroku
-#django_heroku.settings(locals())
+import django_heroku
+django_heroku.settings(locals())

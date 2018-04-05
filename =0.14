@@ -1,0 +1,9 @@
+Requirement already satisfied: pyOpenSSL in ./myvenv/lib/python2.7/site-packages
+Requirement already satisfied: six>=1.5.2 in ./myvenv/lib/python2.7/site-packages (from pyOpenSSL)
+Requirement already satisfied: cryptography>=2.1.4 in ./myvenv/lib/python2.7/site-packages (from pyOpenSSL)
+Requirement already satisfied: asn1crypto>=0.21.0 in ./myvenv/lib/python2.7/site-packages (from cryptography>=2.1.4->pyOpenSSL)
+Requirement already satisfied: cffi>=1.7; platform_python_implementation != "PyPy" in ./myvenv/lib/python2.7/site-packages (from cryptography>=2.1.4->pyOpenSSL)
+Requirement already satisfied: enum34; python_version < "3" in ./myvenv/lib/python2.7/site-packages (from cryptography>=2.1.4->pyOpenSSL)
+Requirement already satisfied: idna>=2.1 in ./myvenv/lib/python2.7/site-packages (from cryptography>=2.1.4->pyOpenSSL)
+Requirement already satisfied: ipaddress; python_version < "3" in ./myvenv/lib/python2.7/site-packages (from cryptography>=2.1.4->pyOpenSSL)
+Requirement already satisfied: pycparser in ./myvenv/lib/python2.7/site-packages (from cffi>=1.7; platform_python_implementation != "PyPy"->cryptography>=2.1.4->pyOpenSSL)
