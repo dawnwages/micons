@@ -2,8 +2,8 @@
 
 import os
 
-PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
-BASE_DIR = os.path.dirname(PROJECT_ROOT)
+PROJECT_DIR = os.path.join(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 DEBUG = True
 
@@ -86,6 +86,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASE_DIR, '../static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -180,13 +181,13 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(PROJECT_ROOT, 'templates'),
+            os.path.join(BASE_DIR, '../templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                #'django.template.context_processors.media',
-                #'django.template.context_processors.static',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
