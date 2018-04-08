@@ -4,3 +4,7 @@
 *.pyc
 /media
 /Vagrantfile.local
+.DS_Store
+*.swp
+/myvenv
+.env
