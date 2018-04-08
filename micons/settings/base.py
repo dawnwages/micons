@@ -16,19 +16,24 @@ ADMINS = (
 #EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 #WagtailBakery
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'micons',
-#    }
-#}
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'micons_db',
+        'USER': 'admin',
+        'PASSWORD': '4',
+        'HOST': '127.0.0.1', 
+        'PORT': '5432',
+        'CONN_MAX_AGE': 600,
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts

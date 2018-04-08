@@ -16,8 +16,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # BASE_URL required for notification emails
 BASE_URL = 'http://localhost:8000'
 
-DATABASES = {'default': dj_database_url.config(default='postgres://postgres@localhost:5432/micons')}
+DATABASES = {'default': dj_database_url.config(default='postgres://postgres@localhost:5432/micons_db')}
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 try:
     from .local import *

@@ -39,6 +39,7 @@ class ProductTag(TaggedItemBase):
 
 @register_snippet
 class Processor(models.Model):
+    id = models.AutoField(primary_key=True)
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     created_date = models.DateTimeField(
@@ -55,6 +56,7 @@ class Processor(models.Model):
 
 @register_snippet
 class Os(models.Model):
+    id = models.AutoField(primary_key=True)
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     created_date = models.DateTimeField(
@@ -71,6 +73,7 @@ class Os(models.Model):
 
 @register_snippet
 class Memory(models.Model):
+    id = models.AutoField(primary_key=True)
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     created_date = models.DateTimeField(
@@ -87,6 +90,7 @@ class Memory(models.Model):
 
 @register_snippet
 class Hd(models.Model):
+    id = models.AutoField(primary_key=True)
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     created_date = models.DateTimeField(
@@ -103,6 +107,7 @@ class Hd(models.Model):
 
 @register_snippet
 class Display(models.Model):
+    id = models.AutoField(primary_key=True)
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     created_date = models.DateTimeField(
@@ -119,6 +124,7 @@ class Display(models.Model):
 
 @register_snippet
 class Ss(models.Model):
+    id = models.AutoField(primary_key=True)
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     created_date = models.DateTimeField(
@@ -135,6 +141,7 @@ class Ss(models.Model):
 
 @register_snippet
 class Color(models.Model):
+    id = models.AutoField(primary_key=True)
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     created_date = models.DateTimeField(
@@ -151,6 +158,7 @@ class Color(models.Model):
 
 @register_snippet
 class Brand(models.Model):
+    id = models.AutoField(primary_key=True)
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     created_date = models.DateTimeField(
@@ -171,6 +179,7 @@ class Brand(models.Model):
     
 @register_snippet
 class Sku(models.Model):
+    id = models.AutoField(primary_key=True)
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=20)
     article = models.ForeignKey('product.ProductPage', on_delete=models.PROTECT) 
