@@ -1,9 +1,17 @@
 from __future__ import absolute_import, unicode_literals
 
 from .base import *
+import dj_database_url
 
 DEBUG = False
 
+ENVIRONMENT = 'production'
+
+ALLOWED_HOSTS = ['']
+
+DATABASES['default'] = dj_database_url.config(
+    default='postgres://postgres@localhost:5432/micons_db'
+)
 
 WAGTAILSEARCH_BACKENDS = {
     'default': {
