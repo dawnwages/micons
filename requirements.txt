@@ -44,7 +44,7 @@ South==0.8.4
 sqlparse==0.2.3
 static3==0.7.0
 Unidecode==0.4.21
-urllib3==1.22
+urllib3==1.26.5
 virtualenv==15.2.0
 virtualenv-clone==0.3.0
 wagtailmodeladmin==2.5.7
